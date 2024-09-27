@@ -1,3 +1,16 @@
 <p [ngClass]="messageClasses">{{ name }}</p>
 
 <p [ngStyle]="someStyles" >Some styling</p>
+
+<p>
+    <button (click)="onClickClicker($event)">clicker</button>
+</p>
+
+<p>
+    <input [disabled]="inputDisabled">
+</p>
+
+<p>
+    <input #inputField type="number" [(ngModel)]="ipValue">
+    <button mat-fab extended (click)="onAddNumber(inputField.valueAsNumber)">ok</button>  
+</p>

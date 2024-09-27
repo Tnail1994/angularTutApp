@@ -1,8 +1,3 @@
-# Allgemein wichtige Informationen
-- Eine Komponente besteht aus .ts (TypeScript), .css (Cascading Style Sheets) und .html (Hypertext Markup Language) Code Weitere Erklärungen zu Styles und css [More about](imgs/html-css-javascript-differences.png)
-
-- Es werden lediglich strings gebunden (Only string bindings)
-
 # Eine Komponente erstellen
 
 ```
@@ -32,10 +27,35 @@ ng g c <Name>
         }
     }
 ```
+___________________
+**Fehler**
+
+Das Binding durch das Property `messageClasses` funktioniert nicht, da das Objekt selbst, sondern nur der Inhalt, verändert hat. Die Lösung wäre eine Getter-Methode, welche im Change-Detection-Cycle ein neues Objekt erstellt.
+
+```ts   
+  get messageClasses() {
+    return {
+      'text-success': this.success,
+      'text-success2': this.success2,
+      'text-danger': this.hasError
+    };
+  }
+```
+
+[Talking with Claude](angular-change-detection-explanation.md) (https://claude.ai/chat/9e68e9f7-3eba-423c-931e-f9c77b60de1e )
+
+
+**Ist dies die Standard-Vorgehensweise?**
+
+Ich habe mir die Frage gestellt, ob dies wirklich der Way to go ist. Jedes mal in der Update-Loop wird ein neues Objekt erstellt. Wird dies sehr oft verwendet, kann ich mir vorstellen, dass dies zu Performance-Problemen gibt.
+
+Todo: Hier auf jeden Fall noch recherieren.
+
+[First infos via clause](angular-performance-optimization.md) 
+___________________
 
 
 Die Verknüpfung der Komponente geschieht wie folgt:
-
 ```ts
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';

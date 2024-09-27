@@ -1,0 +1,1 @@
+- In [FirstLesson](FirstLesson#bindings-mit-verschiedene-fallklassen.md) ist ein Fehler aufgetreten. Hier muss noch erörtert werden, ob get-Methode für Binding von Objekten die Stand-Vorangehensweise ist. Falls nicht, welche ist es?
