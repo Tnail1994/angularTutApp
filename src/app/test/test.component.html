@@ -14,3 +14,18 @@
     <input #inputField type="number" [(ngModel)]="ipValue">
     <button mat-fab extended (click)="onAddNumber(inputField.valueAsNumber)">ok</button>  
 </p>
+
+<div *ngIf="success2">
+    <p>The content is visible because the condition is true.</p>
+</div>
+
+<div *ngIf="success; then hiddenBlock; else endBlock">
+</div>
+
+<ng-template #hiddenBlock>
+    <h2>You found a sected block!</h2>
+</ng-template>
+
+<ng-template #endBlock>
+    <h2>Ending</h2>
+</ng-template>

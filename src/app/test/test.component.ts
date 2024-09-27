@@ -17,7 +17,7 @@ export class TestComponent {
   public success2 = false;
   public hasError = false;
   public inputDisabled = false;
-  public ipValue = 0;
+  public ipValue = 3;
 
 
   public someStyles = {
@@ -44,5 +44,5 @@ export class TestComponent {
     this.success = this.ipValue > 5 && this.ipValue !== 7;
     this.success2 = this.ipValue < 5 && this.ipValue !== 0;
     this.ipValue = 0;    
-}
+  }
 }

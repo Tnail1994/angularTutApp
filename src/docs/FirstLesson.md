@@ -28,7 +28,7 @@ ng g c <Name>
     }
 ```
 ___________________
-**Fehler**
+**Fehler: Stichwort Two-Way-Binding**
 
 Das Binding durch das Property `messageClasses` funktioniert nicht, da das Objekt selbst, sondern nur der Inhalt, verändert hat. Die Lösung wäre eine Getter-Methode, welche im Change-Detection-Cycle ein neues Objekt erstellt.
 
