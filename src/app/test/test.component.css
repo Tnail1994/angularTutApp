@@ -1,0 +1,13 @@
+.text-success {
+    background-color: #444242;
+  }
+
+.text-success2 {
+    color: green;
+  }
+
+  
+.text-danger {
+    color: red;
+    font-style: italic;
+  }
