@@ -20,4 +20,10 @@ export class TestComponent {
     'text-success2': this.success2,
     'text-danger': this.hasError
   }
+
+  public someStyles = {
+    fontStyle: "italic",
+    color: "orange",
+    background: "yellow"
+  }
 }

@@ -86,3 +86,22 @@ Der Import von `CommonModule` ist für das Binding im HTML-Code wichtig:
 
 - Fallklassen-Binding durch `[ngClass]`
 - Style ändert sich, anhand der verschiedenen wahren Fälle
+
+==> Styles abhängig von verschiedenen Conditions machen
+
+# Weiteres zu Binding Styles 
+
+Man kann Styles auch in TypeScript definieren und sich daran binden. Wichtig ist hier ebenfalls der Import `CommonModule` aus vorherigen Kapitel.
+
+```ts
+  public someStyles = {
+    fontStyle: "italic",
+    color: "blue"
+  }
+```
+
+```html
+<p [ngStyle]="someStyles">Some styling</p>
+```
+
+==> Mehrere Styles gleichzeitig definieren und bindable
