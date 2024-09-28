@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { EmployeeService } from '../employee.service';
-import { Observable } from 'rxjs';
+import { catchError, Observable, of, tap } from 'rxjs';
 
 @Component({
   selector: 'app-test',
@@ -20,15 +20,28 @@ export class TestComponent implements OnInit {
   public hasError = false;
   public inputDisabled = false;
   public ipValue = 3;
+  public errorMsg = "";
 
   public employees$: Observable<IEmployee[]> = new Observable;
 
   constructor(private _employeeService: EmployeeService)
   {
   }
+
   ngOnInit(): void {
-    this.employees$ = this._employeeService.getEmployees();
-    console.log(this.employees$);
+ 
+    this.employees$ = this._employeeService.getEmployees().pipe(
+      tap({
+        next: () => this.errorMsg = '',
+        error: (error) => {
+          this.errorMsg = error.message;
+          this.hasError = true;
+        }
+      }),
+      catchError(() => of([]))  // Return an empty array on error
+    );
+    
+    console.log(this.employees$);   
   }
 
   public someStyles = {

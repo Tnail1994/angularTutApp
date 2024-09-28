@@ -81,3 +81,45 @@ Hier todo: Verstehe mit der Möglichkeit 1 Subscribe.
               "src/assets"
   ```
 - Der Ordner `"src/assets"` muss in der `assets` Konfiguration mit angegeben werden. (Die ordner, wo gemockte lokale JSON-Daten liegen). (Normalerweise werden Daten über eine API abgerufen)
+
+
+## Errorhandling von HTTP-Requests
+Für Streams muss zweimal die "pipe" implementiert werden?
+D.h. im Service handle ich den Fehler und gebe ihn "nach oben" weiter
+```ts
+ getEmployees(): Observable<IEmployee[]>{
+    return this.http.get<IEmployee[]>(this._url).pipe(
+      retry(2), 
+      catchError(this.handleError)
+    );
+  }  
+  
+  private handleError(error: HttpErrorResponse) {
+    if (error.error instanceof ErrorEvent) {
+      // Client-side or network error
+      console.error('An error occurred:', error.error.message);
+    } else {
+      // Backend returned an unsuccessful response code
+      console.error(
+        `Backend returned code ${error.status}, ` +
+        `body was: ${error.error}`
+      );
+    }
+    // Return an observable with a user-facing error message
+    return throwError(() => new Error('Something went wrong; please try again later.'));
+  }
+```
+
+Die Komponente, die dann den Response absetzt muss ebenfalls auf den Fehler reagieren um ggfs. dem User anzuzeigen, dass ein Fehler aufgetreten ist
+```ts
+ this.employees$ = this._employeeService.getEmployees().pipe(
+      tap({
+        next: () => this.errorMsg = '',
+        error: (error) => {
+          this.errorMsg = error.message;
+          this.hasError = true;
+        }
+      }),
+      catchError(() => of([]))  // Return an empty array on error
+    );
+```
