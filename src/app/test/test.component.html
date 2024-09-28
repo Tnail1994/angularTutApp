@@ -15,6 +15,10 @@
     <button mat-fab extended (click)="onAddNumber(inputField.valueAsNumber)">ok</button>  
 </p>
 
+<div *ngFor="let employee of employees$ | async">
+    <p>{{employee.age}} {{employee.name}}</p>
+</div>
+
 <div *ngIf="success2">
     <p>The content is visible because the condition is true.</p>
 </div>

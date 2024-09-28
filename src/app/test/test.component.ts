@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { EmployeeService } from '../employee.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-test',
@@ -10,7 +12,7 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './test.component.css',
 })
 
-export class TestComponent {
+export class TestComponent implements OnInit {
 
   public name = "stefans web";
   public success = false;
@@ -19,6 +21,15 @@ export class TestComponent {
   public inputDisabled = false;
   public ipValue = 3;
 
+  public employees$: Observable<IEmployee[]> = new Observable;
+
+  constructor(private _employeeService: EmployeeService)
+  {
+  }
+  ngOnInit(): void {
+    this.employees$ = this._employeeService.getEmployees();
+    console.log(this.employees$);
+  }
 
   public someStyles = {
     fontStyle: "italic",
@@ -45,4 +56,10 @@ export class TestComponent {
     this.success2 = this.ipValue < 5 && this.ipValue !== 0;
     this.ipValue = 0;    
   }
+}
+
+export interface IEmployee {
+  id: number;
+  name: string;
+  age: number;
 }
